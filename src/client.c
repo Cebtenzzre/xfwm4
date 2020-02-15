@@ -3732,7 +3732,7 @@ clientSetOpacity (Client *c, guint32 opacity, guint32 clear, guint32 xor)
     {
         long long multiplier = 1, divisor = 1;
 
-        c->opacity = applied = opacity;
+        applied = opacity;
 
         if (FLAG_TEST (c->opacity_flags, OPACITY_MOVE))
         {
@@ -3776,7 +3776,8 @@ clientDecOpacity (Client *c)
 
     if ((c->opacity > OPACITY_SET_MIN) && !(FLAG_TEST (c->xfwm_flags, XFWM_FLAG_OPACITY_LOCKED)))
     {
-         clientSetOpacity (c, c->opacity - OPACITY_SET_STEP, 0, 0);
+         c->opacity -= OPACITY_SET_STEP;
+         setHint (display_info, c->frame, NET_WM_WINDOW_OPACITY, c->opacity);
     }
 }
 
@@ -3802,7 +3803,8 @@ clientIncOpacity (Client *c)
          {
              opacity = NET_WM_OPAQUE;
          }
-         clientSetOpacity (c, opacity, 0, 0);
+         c->opacity = opacity;
+         setHint (display_info, c->frame, NET_WM_WINDOW_OPACITY, opacity);
     }
 }
 

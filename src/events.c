@@ -807,7 +807,7 @@ titleButton (Client *c, guint state, XfwmEventButton *event)
     {
         /* Mouse wheel scroll up */
 #ifdef HAVE_COMPOSITOR
-        if ((state) && (state == screen_info->params->easy_click) && compositorIsActive (screen_info))
+        if ((state) && (state == screen_info->params->easy_click))
         {
             clientIncOpacity(c);
         }
@@ -825,7 +825,7 @@ titleButton (Client *c, guint state, XfwmEventButton *event)
     {
         /* Mouse wheel scroll down */
 #ifdef HAVE_COMPOSITOR
-        if ((state) && (state == screen_info->params->easy_click) && compositorIsActive (screen_info))
+        if ((state) && (state == screen_info->params->easy_click))
         {
             clientDecOpacity(c);
         }
